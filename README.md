@@ -22,7 +22,7 @@ https://svelte.dev/repl/d8af37de112a45f3a3da2ffee0e7eea7?version=3.31.0
 <script>
 import Select from 'simple-svelte-select';
 
-items = [
+const items = [
   { value: 'apple', label: "Tasty apple" },
   { value: 'lemon', label: "Juicy lemon" }
 ];
