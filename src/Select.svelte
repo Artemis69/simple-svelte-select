@@ -90,6 +90,7 @@
              -moz-user-select: none;
                   user-select: none;
           width: 100%;
+          min-width: 152px;
       }
       .selectContainer:hover{
           border-color: #b2b8bf;
