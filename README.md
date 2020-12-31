@@ -22,6 +22,10 @@ Actual version
 
 [Simple](https://svelte.dev/repl/a7ae80f2cac54bed810f576fe2655b06?version=3.31.0 "Svelte Repl")
 
+Also you can try new (secret) version
+
+[Not yet](https://svelte.dev/repl/31cba90b9da74c2ebd5d8b10f5d1ee6c?version=3.31.0)
+
 ## Simple example
 
 ````jsx
