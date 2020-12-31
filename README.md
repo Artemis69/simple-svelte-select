@@ -14,11 +14,13 @@ npm install simple-svelte-select
 
 ## Repl
 
+1.0.13 Version
+
 [Simple](https://svelte.dev/repl/d8af37de112a45f3a3da2ffee0e7eea7?version=3.31.0 "Svelte Repl")
 
-In this repl you can see the scrolling
+Actual version
 
-[Simple but a little more items](https://svelte.dev/repl/a7ae80f2cac54bed810f576fe2655b06?version=3.31.0 "Svelte Repl")
+[Simple](https://svelte.dev/repl/a7ae80f2cac54bed810f576fe2655b06?version=3.31.0 "Svelte Repl")
 
 ## Simple example
 
@@ -49,10 +51,9 @@ By default Select prohibits entering a search query on mobile devices (If the de
 <Select items bind:selectedValue disabled={false}/>
 ````
 
-The items array should not be empty, and should be as in the example above.
+## Async
 
-selectedValue must be undefined or items[i].
-In the example above, selectedValue is items[0] which is Tasty Apple.
+See example in [Repl](https://svelte.dev/repl/975f82c7fd1a4f4c81ec16155ad16770?version=3.31.0)
 
 ## Styling
 

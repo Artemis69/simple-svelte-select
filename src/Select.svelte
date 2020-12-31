@@ -8,10 +8,10 @@
 	export let disabled = window.matchMedia('(max-width: 640px)').matches;
   
     let isActive = false;
-  
-    if (items.length == 0) throw new Error('items should not be empty');
-      
-    let value;
+   
+	let value;
+	
+	if((!items || items.length === 0) && selectedValue) throw Error('To be able to select value items must be defined');
       
     const inputHandler = () => {
         if(value != ''){
@@ -37,9 +37,8 @@
     }
 
 </script>
-  
-{#if items.length != 0}
-    <div class="selectContainer" class:active={isActive} use:clickOutside on:click_outside={() => {isActive = false}}>
+
+<div class="selectContainer" class:active={isActive} use:clickOutside on:click_outside={() => {isActive = false}}>
         {#if selectedValue}
             <div class="selectedValue" on:click={() => isActive = !isActive}>
                 <span>
@@ -51,32 +50,47 @@
             </div>
         {/if}
         <div class="inputContainer" on:click={() => isActive = !isActive}>
-            <input 
-                type="text" 
-                placeholder={placeholder} 
-                autocomplete="off" 
-                autocorrect="off" 
-				spellcheck="false"
-				disabled={disabled}
-                bind:value={value}
-                on:input={inputHandler}
-            >
+			{#if items && items.length > 0}
+				<input 
+					type="text" 
+					placeholder={placeholder} 
+					autocomplete="off" 
+					autocorrect="off" 
+					spellcheck="false"
+					disabled={disabled}
+					bind:value={value}
+					on:input={inputHandler}
+				>
+			{:else}
+				<input 
+					type="text" 
+					placeholder={placeholder} 
+					disabled
+				>
+			{/if}
         </div>
         {#if isActive}
             <div class="items">
-                {#each items as item, i}
-                    {#if !item.hidden}
-                        <div class="itemContainer" class:active="{selectedValue == items[i]}">
-                            <div class="item" on:click={() => {isActive = false; selectedValue=items[i]; clearSearch();}}>
-                                <span>{item.label}</span>
-                            </div>
-                        </div>
-                    {/if}
-                {/each}
+				{#if items && items.length > 0}
+					{#each items as item, i}
+						{#if !item.hidden}
+							<div class="itemContainer" class:active="{selectedValue == items[i]}">
+								<div class="item" on:click={() => {isActive = false; selectedValue=items[i]; clearSearch();}}>
+									<span>{item.label}</span>
+								</div>
+							</div>
+						{/if}
+					{/each}
+				{:else}
+					<div class="itemContainer">
+						<div class="item" on:click={() => {isActive = false;}}>
+							<span>No items found</span>
+						</div>
+					</div>
+				{/if}
             </div>
         {/if}
-      </div>
-{/if}
+</div>
   
 <style>
 :root {
