@@ -96,17 +96,23 @@
 		{:else}
 			<div class={inputContainerStyle} on:click={() => isActive = !isActive}>
 				{#if items && items.length > 0}
-					<input 
-						type="text" 
-						placeholder={placeholder} 
-						autocomplete="off" 
-						autocorrect="off" 
-						spellcheck="false"
-						disabled={disabled}
-						bind:value={value}
-						on:input={inputHandler}
-						class={inputStyle}
+					{#if !disabled}
+						<input 
+							type="text" 
+							placeholder={placeholder} 
+							autocomplete="off" 
+							autocorrect="off" 
+							spellcheck="false"
+							disabled={disabled}
+							bind:value={value}
+							on:input={inputHandler}
+							class={inputStyle}
 						>
+					{:else}
+						<p class={inputStyle}>
+							{placeholder}
+						</p>
+					{/if}
 				{:else}
 					<input 
 						type="text" 

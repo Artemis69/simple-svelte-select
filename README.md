@@ -1,5 +1,7 @@
 # Simple Svelte Select
 
+## A 12 kb min.js and 7 kb gzip replacement for  Svelte Select
+
 ## Installation
 
 ````bash
@@ -14,17 +16,7 @@ npm install simple-svelte-select
 
 ## Repl
 
-1.0.13 Version
-
-[Simple](https://svelte.dev/repl/d8af37de112a45f3a3da2ffee0e7eea7?version=3.31.0 "Svelte Repl")
-
-Old version
-
-[Simple](https://svelte.dev/repl/a7ae80f2cac54bed810f576fe2655b06?version=3.31.0 "Svelte Repl")
-
-Actual version
-
-[Simple](https://svelte.dev/repl/31cba90b9da74c2ebd5d8b10f5d1ee6c?version=3.31.0 "Svelte Repl")
+[Actual version](https://svelte.dev/repl/31cba90b9da74c2ebd5d8b10f5d1ee6c?version=3.31.0 "Svelte Repl")
 
 ## Simple example
 
