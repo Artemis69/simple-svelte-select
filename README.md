@@ -1,6 +1,6 @@
 # Simple Svelte Select
 
-A 12 kb min.js and 7 kb gzip replacement for  Svelte Select
+Inspired by the Svelte Select
 
 ## Installation
 
