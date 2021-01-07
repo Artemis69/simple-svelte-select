@@ -1,6 +1,6 @@
 # Simple Svelte Select
 
-## A 12 kb min.js and 7 kb gzip replacement for  Svelte Select
+A 12 kb min.js and 7 kb gzip replacement for  Svelte Select
 
 ## Installation
 
@@ -62,7 +62,7 @@ Look at the picture below how to use the site
 
 ````jsx
 
-//Get this from this(sss-configurator.web.app) site then paste is into your code like this
+//Get this from this(sss-configurator.web.app) site then paste it into your code like this
 const styles = {"light":{"bgCol":"red","bCol":"yellow","cACol":"orange","bHCol":"blue","selCol":"#000","iTCol":"#3f4f5f","iS":"0 2px 3px 0 rgba(44, 62, 80, 0.24)","iHCol":"#E7F2FF","iACol":"#e2efff","iTNSCol":"#000","iATCol":"#fff","iSACol":"#007bff"},"dark":{"bgCol":"#161616","bCol":"#333","cACol":"#006fe8","bHCol":"#444","selCol":"#eee","iTCol":"#eee","iS":"0 2px 2px 0 rgba(24, 24, 24, 0.24)","iHCol":"#252525","iACol":"#323232","iTNSCol":"#eee","iATCol":"#fff","iSACol":"#414141"}}
 
 let selectedValue;

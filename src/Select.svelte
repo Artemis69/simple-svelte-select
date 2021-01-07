@@ -79,14 +79,14 @@
 	const inputStyle = css(`background: transparent;border-radius: 3px;font-size: 1em;color: ${dark ? styles.dark.iTCol : styles.light.iTCol};padding:0;line-height:42px;height:100%;letter-spacing:-0.08px;cursor:default;width:calc(100% - 32px);border:none;margin:0;&:focus{outline:none;}`);
 	const itemsStyle = css(`position: absolute;left: 0;right: 0;top: 48px;background-color:${dark ? styles.dark.bgCol : styles.light.bgCol};border-radius: 4px;-webkit-box-shadow: ${dark ? styles.dark.iS : styles.light.iS};box-shadow: ${dark ? styles.dark.iS : styles.light.iS};overflow-y: auto;z-index: 4;max-height: 250px;&::-webkit-scrollbar {width: 8px;height: 8px;background-color: rgba(0, 0, 0, 0);-webkit-border-radius: 100px;}&::-webkit-scrollbar:hover {background-color: rgba(0, 0, 0, 0.09);}&::-webkit-scrollbar-thumb {background: rgba(0, 0, 0, 0.5);-webkit-border-radius: 100px;}&::-webkit-scrollbar-thumb:active {background: rgba(0, 0, 0, 0.61);-webkit-border-radius: 100px;}&::-webkit-scrollbar-thumb:vertical {min-height: 10px;}&::-webkit-scrollbar-thumb:horizontal {min-width: 10px;}&::-webkit-resizer{background-color: transparent;}`);
 	const itemContainerStyle = css(`width: 100%;height: 42px;background: ${dark ? styles.dark.bgCol : styles.light.bgCol};display: -webkit-box;display: flex;-webkit-box-pack: center;justify-content: center;-webkit-box-align:center;align-items:center;color:${dark ? styles.dark.iTNSCol : styles.light.iTNSCol};	&:hover{background: ${dark ? styles.dark.iHCol : styles.light.iHCol};}&:active{background:${dark ? styles.dark.iACol : styles.light.iACol};}&.active{color:${dark ? styles.dark.iATCol : styles.light.iATCol};background:${dark ? styles.dark.iSACol : styles.light.iSACol};}`);
-	const itemStyle = css(`width: calc(100% - 32px);height: 42px;display: -webkit-box;display: flex;-webkit-box-pack: start;justify-content: flex-start;-webkit-box-align:center;align-items:center;&>span{font-size: 1em;}`);
-
+	const itemStyle = css(`width:calc(100% - 32px);height:42px;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-align:center;align-items:center;font-size:1em;overflow:hidden;`);
+	const selectedValueLabelStyle = css(`overflow: hidden;text-overflow: ellipsis;white-space: nowrap;`);
 </script>
 
 <div class={selectContainerStyle} class:active={isActive} use:clickOutside on:click_outside={() => {isActive = false}}>
         {#if selectedValue}
             <div class={selectedValueStyle} on:click={() => isActive = !isActive}>
-                <span>
+                <span class={selectedValueLabelStyle}>
                     {selectedValue.label}
                 </span>
                 <span class={removeStyle} on:click={() => {selectedValue = undefined; isActive = false; clearSearch();}}>
@@ -128,18 +128,14 @@
 				{#if items && items.length > 0}
 					{#each items as item, i}
 						{#if !item.hidden}
-							<div class={itemContainerStyle} class:active="{selectedValue == items[i]}" on:click={() => {isActive = false; selectedValue=items[i]; clearSearch();}}>
-								<div class={itemStyle}>
-									<span>{item.label}</span>
-								</div>
+							<div class={itemContainerStyle} class:active={selectedValue == items[i]} on:click={() => {isActive = false; selectedValue=items[i]; clearSearch();}}>
+								<span class={itemStyle}>{item.label}</span>
 							</div>
 						{/if}
 					{/each}
 				{:else}
-					<div class={itemContainerStyle}>
-						<div class={itemStyle} on:click={() => {isActive = false;}}>
-							<span>No items found</span>
-						</div>
+					<div class={itemContainerStyle} on:click={() => {isActive = false;}}>
+						<span class={itemStyle}>No items found</span>
 					</div>
 				{/if}
             </div>
