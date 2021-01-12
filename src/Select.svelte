@@ -1,9 +1,9 @@
 <script>
     import { clickOutside } from './clickOutside.js';
   
-    export let items = undefined;
+    export let items;
     export let placeholder = 'Select...';
-    export let selectedValue = undefined;
+    export let selectedValue;
 
     export let disabled = window.matchMedia('(max-width: 640px)').matches;
     
@@ -11,8 +11,6 @@
    
 	let value;
 	
-	if((!items || items.length === 0) && selectedValue) throw Error('To be able to select value items must be defined');
-      
     const inputHandler = () => {
         if(value != ''){
             for(let i = 0; i < items.length; i++){
@@ -31,9 +29,11 @@
       
     const clearSearch = () => {
         value = undefined;
-        for(let i = 0; i < items.length; i++){
-            items[i].hidden = false;
-        }
+        if(items){
+				for(let i = 0; i < items.length; i++){
+            	items[i].hidden = false;
+        	}
+		}
     }
 
     import { css } from 'goober';
@@ -74,13 +74,12 @@
 
 	const selectContainerStyle = css(`background: ${dark ? styles.dark.bgCol : styles.light.bgCol};border: 1px solid ${dark ? styles.dark.bCol : styles.light.bCol};outline: none;border-radius:3px;padding:0 16px;position:relative;display:-webkit-box;display:flex;-webkit-box-align:center;align-items:center;height:42px;-webkit-user-select:none;-moz-user-select:none;user-select:none;width:100%;min-width:152px;&.active{border: 1px solid ${dark ? styles.dark.cACol : styles.light.cACol};}&:hover{border: 1px solid ${dark ? styles.dark.bHCol : styles.light.bHCol};}`);
 	const selectedValueStyle = css(`position: absolute;height: 100%;left: 0;right: 0;display: -webkit-box;display: flex;-webkit-box-pack: justify;justify-content: space-between;-webkit-box-align: center;align-items: center;z-index: 3;line-height: 42px;border-radius: 3px;background: ${dark ? styles.dark.bgCol : styles.light.bgCol};&>span{color: ${dark ? styles.dark.selCol : styles.light.selCol};margin: 0 16px;}`);
-	const removeStyle = css(`cursor:pointer;font-size: 1.5em;margin-top:-4px!important;`);
 	const inputContainerStyle = css(`border-radius: 3px;position: absolute;height: 100%;left: 0;right: 0;display: -webkit-box;display: flex;-webkit-box-pack: center;justify-content: center;-webkit-box-align: center;align-items: center;background: ${dark ? styles.dark.bgCol : styles.light.bgCol};z-index: 2;`);
 	const inputStyle = css(`background: transparent;border-radius: 3px;font-size: 1em;color: ${dark ? styles.dark.iTCol : styles.light.iTCol};padding:0;line-height:42px;height:100%;letter-spacing:-0.08px;cursor:default;width:calc(100% - 32px);border:none;margin:0;&:focus{outline:none;}`);
 	const itemsStyle = css(`position: absolute;left: 0;right: 0;top: 48px;background-color:${dark ? styles.dark.bgCol : styles.light.bgCol};border-radius: 4px;-webkit-box-shadow: ${dark ? styles.dark.iS : styles.light.iS};box-shadow: ${dark ? styles.dark.iS : styles.light.iS};overflow-y: auto;z-index: 4;max-height: 250px;&::-webkit-scrollbar {width: 8px;height: 8px;background-color: rgba(0, 0, 0, 0);-webkit-border-radius: 100px;}&::-webkit-scrollbar:hover {background-color: rgba(0, 0, 0, 0.09);}&::-webkit-scrollbar-thumb {background: rgba(0, 0, 0, 0.5);-webkit-border-radius: 100px;}&::-webkit-scrollbar-thumb:active {background: rgba(0, 0, 0, 0.61);-webkit-border-radius: 100px;}&::-webkit-scrollbar-thumb:vertical {min-height: 10px;}&::-webkit-scrollbar-thumb:horizontal {min-width: 10px;}&::-webkit-resizer{background-color: transparent;}`);
-	const itemContainerStyle = css(`width: 100%;height: 42px;background: ${dark ? styles.dark.bgCol : styles.light.bgCol};display: -webkit-box;display: flex;-webkit-box-pack: center;justify-content: center;-webkit-box-align:center;align-items:center;color:${dark ? styles.dark.iTNSCol : styles.light.iTNSCol};	&:hover{background: ${dark ? styles.dark.iHCol : styles.light.iHCol};}&:active{background:${dark ? styles.dark.iACol : styles.light.iACol};}&.active{color:${dark ? styles.dark.iATCol : styles.light.iATCol};background:${dark ? styles.dark.iSACol : styles.light.iSACol};}`);
-	const itemStyle = css(`width:calc(100% - 32px);height:42px;display:-webkit-box;display:flex;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-align:center;align-items:center;font-size:1em;overflow:hidden;`);
+	const itemContainerStyle = css(`padding: 0 16px;height: 42px;background: ${dark ? styles.dark.bgCol : styles.light.bgCol};display: -webkit-box;display: flex;-webkit-box-align:center;align-items:center;color:${dark ? styles.dark.iTNSCol : styles.light.iTNSCol};&:hover{background: ${dark ? styles.dark.iHCol : styles.light.iHCol};}&:active{background:${dark ? styles.dark.iACol : styles.light.iACol};}&.active{color:${dark ? styles.dark.iATCol : styles.light.iATCol};background:${dark ? styles.dark.iSACol : styles.light.iSACol};}overflow: hidden;`);
 	const selectedValueLabelStyle = css(`overflow: hidden;text-overflow: ellipsis;white-space: nowrap;`);
+	const removeStyle = css(`cursor:pointer;font:2em monospace;`);
 </script>
 
 <div class={selectContainerStyle} class:active={isActive} use:clickOutside on:click_outside={() => {isActive = false}}>
@@ -129,13 +128,13 @@
 					{#each items as item, i}
 						{#if !item.hidden}
 							<div class={itemContainerStyle} class:active={selectedValue == items[i]} on:click={() => {isActive = false; selectedValue=items[i]; clearSearch();}}>
-								<span class={itemStyle}>{item.label}</span>
+								{item.label}
 							</div>
 						{/if}
 					{/each}
 				{:else}
 					<div class={itemContainerStyle} on:click={() => {isActive = false;}}>
-						<span class={itemStyle}>No items found</span>
+						No items found
 					</div>
 				{/if}
             </div>

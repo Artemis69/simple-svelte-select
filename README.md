@@ -51,6 +51,7 @@ By default Select prohibits entering a search query on mobile devices (If the de
 
 See example in [Repl](https://svelte.dev/repl/975f82c7fd1a4f4c81ec16155ad16770?version=3.31.0)
 
+(If you need Async you'd better try [svelte-select](https://www.npmjs.com/package/svelte-select). I'm not sure if it works)
 ## Styling
 
 Go to the website (https://sss-configurator.web.app/). 
@@ -61,15 +62,11 @@ Look at the picture below how to use the site
 ![screenshot](https://i.imgur.com/2iWAGQf.png)
 
 ````jsx
-
-//Get this from this(sss-configurator.web.app) site then paste it into your code like this
 const styles = {"light":{"bgCol":"red","bCol":"yellow","cACol":"orange","bHCol":"blue","selCol":"#000","iTCol":"#3f4f5f","iS":"0 2px 3px 0 rgba(44, 62, 80, 0.24)","iHCol":"#E7F2FF","iACol":"#e2efff","iTNSCol":"#000","iATCol":"#fff","iSACol":"#007bff"},"dark":{"bgCol":"#161616","bCol":"#333","cACol":"#006fe8","bHCol":"#444","selCol":"#eee","iTCol":"#eee","iS":"0 2px 2px 0 rgba(24, 24, 24, 0.24)","iHCol":"#252525","iACol":"#323232","iTNSCol":"#eee","iATCol":"#fff","iSACol":"#414141"}}
 
 let selectedValue;
 
-const items = new Array(50)
-		.fill('')
-		.map((_, i) => ({ value: `item-${i + 1}`, label: `Item ${i + 1}` }))
+const items = new Array(50).fill('').map((_, i) => ({ value: `item-${i + 1}`, label: `Item ${i + 1}` }))
 
 //Then pass it into your select
 <Select {items} bind:selectedValue styles={styles}/>
